@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.balance-title {
+  text-align: center;
+}
+
+.connect-btn {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.status-box {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.status-box-null {
+  display: none;
+}
