@@ -19,15 +19,16 @@ contract Bank {
     }
 
     // Withdraw function (payable)
-    function withdraw(uint256 amount, address payable client) public payable {
+    function withdraw(uint256 amount) public payable {
+        address payable client = msg.sender;
         require(balance[msg.sender] >= amount);
         client.transfer(amount);
         balance[msg.sender] = balance[msg.sender] - amount;
     }
 
     // Check balance function (view)
-    function getBalance(address client) public view returns(uint256){
-        return (balance[client]);
+    function getBalance() public view returns(uint256){
+        return (balance[msg.sender]);
     }
     
     // Total balance in contract
