@@ -8,12 +8,17 @@ import BankInfo from './components/BankInfo'
 function App() {
   const [status, setStatus] = useState('')
   const [connected, setConnected] = useState()
+  const [wallet, setWallet] = useState()
   return (
     <>
       <NavBar />
-      <ConnectBtn setStatus={setStatus} setConnected={setConnected} />
+      <ConnectBtn
+        setStatus={setStatus}
+        setConnected={setConnected}
+        setWallet={setWallet}
+      />
       <StatusBox status={status} />
-      {connected && <BankInfo />}
+      {connected && <BankInfo onAccoutChange={wallet} />}
     </>
   )
 }

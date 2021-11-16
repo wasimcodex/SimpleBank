@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap'
 
 import { connectWallet, getWalletStatus } from '../utils/connectWallet'
 
-export const ConnectBtn = ({ setStatus, setConnected }) => {
+export const ConnectBtn = ({ setStatus, setConnected, setWallet }) => {
   const [walletAddress, setWalletAddress] = useState('')
 
   const handleConnect = async () => {
@@ -11,6 +11,7 @@ export const ConnectBtn = ({ setStatus, setConnected }) => {
     setStatus(walletResponse.status)
     setConnected(walletResponse.connected)
     setWalletAddress(walletResponse.address)
+    setWallet(walletResponse.address)
   }
 
   const checkWalletStatus = async () => {
@@ -18,6 +19,7 @@ export const ConnectBtn = ({ setStatus, setConnected }) => {
     setStatus(walletResponse.status)
     setConnected(walletResponse.connected)
     setWalletAddress(walletResponse.address)
+    setWallet(walletResponse.address)
   }
 
   const walletListener = () => {

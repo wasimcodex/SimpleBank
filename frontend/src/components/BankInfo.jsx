@@ -12,7 +12,7 @@ import { useState, useEffect } from 'react'
 
 import { getBalance, depositEth, withdrawEth } from '../utils/bankFunctions'
 
-const BankInfo = () => {
+const BankInfo = ({ onAccoutChange }) => {
   const [balanceINR, setBalanceINR] = useState(0)
   const [balanceETH, setBalanceETH] = useState(0)
   const [showDeposit, setShowDeposit] = useState(false)
@@ -72,7 +72,7 @@ const BankInfo = () => {
 
   useEffect(() => {
     checkBalance()
-  }, [])
+  }, [onAccoutChange])
 
   return (
     <>
