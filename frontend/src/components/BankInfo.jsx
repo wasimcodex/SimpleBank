@@ -6,14 +6,21 @@ import {
   InputGroup,
   Col,
   Row,
+  Alert,
 } from 'react-bootstrap'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
+import { getBalance, depositEth, withdrawEth } from '../utils/bankFunctions'
 
 const BankInfo = () => {
   const [balanceINR, setBalanceINR] = useState(0)
   const [balanceETH, setBalanceETH] = useState(0)
   const [showDeposit, setShowDeposit] = useState(false)
   const [showWithdraw, setShowWithdraw] = useState(false)
+  const [exhRate, setExhRate] = useState(0)
+  const [inputINR, setInputINR] = useState(null)
+  const [inputETH, setInputETH] = useState(null)
+  const [response, setResponse] = useState(null)
 
   const handleShowDeposit = () => {
     setShowDeposit(true)
@@ -26,14 +33,53 @@ const BankInfo = () => {
   const handleClose = () => {
     setShowDeposit(false)
     setShowWithdraw(false)
+    setInputINR(null)
+    setInputETH(null)
+    setResponse(null)
   }
+
+  const checkBalance = async () => {
+    const balance = await getBalance()
+    setBalanceETH(balance.eth)
+    setBalanceINR(balance.inr)
+    setExhRate(balance.exhRate)
+  }
+
+  const handleInoutINR = (e) => {
+    setInputINR(e.target.value)
+    setInputETH(e.target.value / exhRate)
+  }
+
+  const handleDeposit = async () => {
+    setResponse(null)
+    const deposit = await depositEth(inputETH.toString())
+    setInputETH(null)
+    setInputINR(null)
+    setResponse(deposit.status)
+  }
+
+  const handleWithdraw = async () => {
+    if (inputINR > balanceINR) {
+      setResponse('Insufficient Balance')
+    } else {
+      setResponse(null)
+      const withdraw = await withdrawEth(inputETH.toString())
+      setInputETH(null)
+      setInputINR(null)
+      setResponse(withdraw.status)
+    }
+  }
+
+  useEffect(() => {
+    checkBalance()
+  }, [])
 
   return (
     <>
       <div className="balance-card">
         <h1>
           Your Balance
-          <IoIosRefresh className="refresh-icon" />
+          <IoIosRefresh className="refresh-icon" onClick={checkBalance} />
         </h1>
         <h3 className="balance-inr">{parseFloat(balanceINR).toFixed(2)} INR</h3>
         <h3 className="balance-eth">{parseFloat(balanceETH).toFixed(4)} ETH</h3>
@@ -64,6 +110,8 @@ const BankInfo = () => {
                     <FormControl
                       placeholder="Enter Amount in INR"
                       type="number"
+                      value={inputINR > 0 ? inputINR : ''}
+                      onChange={handleInoutINR}
                     />
                     <InputGroup.Text>INR</InputGroup.Text>
                   </InputGroup>
@@ -75,6 +123,7 @@ const BankInfo = () => {
                     <FormControl
                       placeholder="ETH Equivalent"
                       type="number"
+                      value={inputETH > 0 ? inputETH : ''}
                       readOnly
                     />
                     <InputGroup.Text>ETH</InputGroup.Text>
@@ -83,7 +132,11 @@ const BankInfo = () => {
               </Row>
             </Container>
             <div className="btn-grp">
-              <Button className="deposit-btn" variant="success">
+              <Button
+                className="deposit-btn"
+                variant="success"
+                onClick={showDeposit ? handleDeposit : handleWithdraw}
+              >
                 {showDeposit ? 'Deposit' : 'Withdraw'}
               </Button>
               <Button
@@ -94,6 +147,15 @@ const BankInfo = () => {
                 Close
               </Button>
             </div>
+            {response && (
+              <Container>
+                <Row className="justify-content-center">
+                  <Col md="6">
+                    <Alert variant="info">{response}</Alert>
+                  </Col>
+                </Row>
+              </Container>
+            )}
           </>
         ) : null}
       </div>
