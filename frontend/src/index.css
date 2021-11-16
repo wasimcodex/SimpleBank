@@ -12,13 +12,44 @@ code {
     monospace;
 }
 
-.balance-title {
+.amount-input {
+  margin: 10px;
+}
+
+.balance-card {
+  margin-top: 20px;
   text-align: center;
+}
+
+.balance-eth {
+  color: rgb(19, 202, 28);
+}
+
+.balance-inr {
+  color: rgb(25, 214, 214);
+}
+
+.btn-grp {
+  margin: 20px;
+}
+
+.deposit-btn {
+  margin-right: 20px;
+}
+
+.withdraw-btn {
+  margin-left: 20px;
 }
 
 .connect-btn {
   text-align: center;
-  margin-top: 20px;
+  margin: 20px;
+}
+
+.refresh-icon {
+  margin-left: 10px;
+  font-size: 28px;
+  cursor: pointer;
 }
 
 .status-box {

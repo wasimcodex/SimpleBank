@@ -9,21 +9,23 @@ export const ConnectBtn = ({ setStatus, setConnected }) => {
   const handleConnect = async () => {
     const walletResponse = await connectWallet()
     setStatus(walletResponse.status)
+    setConnected(walletResponse.connected)
     setWalletAddress(walletResponse.address)
   }
 
   const checkWalletStatus = async () => {
     const walletResponse = await getWalletStatus()
     setStatus(walletResponse.status)
+    setConnected(walletResponse.connected)
     setWalletAddress(walletResponse.address)
   }
 
   const walletListener = () => {
-      if (window.ethereum) {
-        window.ethereum.on('accountsChanged', (accounts) => {
-          checkWalletStatus()
-        })
-      }
+    if (window.ethereum) {
+      window.ethereum.on('accountsChanged', (accounts) => {
+        checkWalletStatus()
+      })
+    }
   }
 
   useEffect(() => {
