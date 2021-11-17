@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Button } from 'react-bootstrap'
 
-import { connectWallet, getWalletStatus } from '../utils/connectWallet'
+import { connectWallet, getWalletStatus } from '../utils/walletFunctions'
 
 export const ConnectBtn = ({ setStatus, setConnected, setWallet }) => {
   const [walletAddress, setWalletAddress] = useState('')
