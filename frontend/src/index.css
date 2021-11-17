@@ -37,6 +37,25 @@ code {
   margin-right: 20px;
 }
 
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 5px;
+  background-color: teal;
+  color: white;
+  text-align: center;
+}
+
+.footer-text {
+  font-size: large;
+}
+
+.info-icon {
+  font-size: x-large;
+}
+
 .withdraw-btn {
   margin-left: 20px;
 }

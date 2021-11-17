@@ -1,9 +1,10 @@
+import { useState } from 'react'
+
 import NavBar from './components/NavBar'
 import ConnectBtn from './components/ConnectBtn'
 import StatusBox from './components/StatusBox'
-
-import { useState } from 'react'
 import BankInfo from './components/BankInfo'
+import Footer from './components/Footer'
 
 function App() {
   const [status, setStatus] = useState('')
@@ -19,6 +20,7 @@ function App() {
       />
       <StatusBox status={status} />
       {connected && <BankInfo onAccoutChange={wallet} />}
+      <Footer />
     </>
   )
 }
