@@ -47,7 +47,7 @@ const BankInfo = ({ onAccoutChange }) => {
 
   const handleInoutINR = (e) => {
     setInputINR(e.target.value)
-    setInputETH(e.target.value / exhRate)
+    setInputETH((e.target.value / exhRate).toFixed(18))
   }
 
   const handleDeposit = async () => {
