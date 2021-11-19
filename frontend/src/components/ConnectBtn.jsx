@@ -16,6 +16,7 @@ export const ConnectBtn = ({ setStatus, setConnected, setWallet }) => {
 
   const checkWalletStatus = async () => {
     const walletResponse = await getWalletStatus()
+    console.log('checking wallet status')
     setStatus(walletResponse.status)
     setConnected(walletResponse.connected)
     setWalletAddress(walletResponse.address)
@@ -33,7 +34,7 @@ export const ConnectBtn = ({ setStatus, setConnected, setWallet }) => {
   useEffect(() => {
     checkWalletStatus()
     walletListener()
-  })
+  }, [walletAddress])
 
   return (
     <div className="connect-btn">
