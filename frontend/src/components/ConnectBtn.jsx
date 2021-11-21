@@ -14,27 +14,26 @@ export const ConnectBtn = ({ setStatus, setConnected, setWallet }) => {
     setWallet(walletResponse.address)
   }
 
-  const checkWalletStatus = async () => {
-    const walletResponse = await getWalletStatus()
-    console.log('checking wallet status')
-    setStatus(walletResponse.status)
-    setConnected(walletResponse.connected)
-    setWalletAddress(walletResponse.address)
-    setWallet(walletResponse.address)
-  }
-
-  const walletListener = () => {
-    if (window.ethereum) {
-      window.ethereum.on('accountsChanged', (accounts) => {
-        checkWalletStatus()
-      })
-    }
-  }
-
   useEffect(() => {
+    const checkWalletStatus = async () => {
+      const walletResponse = await getWalletStatus()
+      setStatus(walletResponse.status)
+      setConnected(walletResponse.connected)
+      setWalletAddress(walletResponse.address)
+      setWallet(walletResponse.address)
+    }
+
+    const walletListener = () => {
+      if (window.ethereum) {
+        window.ethereum.on('accountsChanged', (accounts) => {
+          checkWalletStatus()
+        })
+      }
+    }
+
     checkWalletStatus()
     walletListener()
-  }, [walletAddress])
+  }, [setConnected, setStatus, setWallet])
 
   return (
     <div className="connect-btn">
