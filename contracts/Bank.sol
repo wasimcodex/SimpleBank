@@ -4,7 +4,7 @@ pragma solidity ^0.7.0;
 contract Bank {
 
     // Mapping of user address to their balance
-    mapping(address => uint256) public balance;
+    mapping(address => uint256) private balance;
     
 
     // Deposit function (payable)
@@ -29,10 +29,5 @@ contract Bank {
     // Check balance function (view)
     function getBalance() public view returns(uint256){
         return (balance[msg.sender]);
-    }
-    
-    // Total balance in contract
-    function getCashPool() public view returns(uint256){
-        return address(this).balance;
     }
 }
