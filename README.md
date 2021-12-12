@@ -82,6 +82,6 @@ things from various sources and get them to work. So I wanted to build a simple 
 ***
 
 This project is also hosted [here](https://simple-bank-co.herokuapp.com/), take a look.
-  
-I hope this helps someone, I'm planning to write a detailed blog explaning every single aspect of this project soon. Once done I'll share the link to the same here.
+
+This project is intented to help people getting started, understand the full stack process of developing a DApp. I have written a blog series explaining the whole process. If you're interested [here](https://dev.to/wasimcodex/intro-writing-a-smart-contract-part-14-13b1) is the link to the series.
 
