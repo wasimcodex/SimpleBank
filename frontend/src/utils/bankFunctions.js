@@ -25,7 +25,7 @@ export const depositEth = async (amount) => {
   try {
     await window.ethereum.request({
       method: 'eth_sendTransaction',
-      params: [txParams],
+      params: [txParams, 'latest'],
     })
     return {
       status: 'Transaction Successful. Refresh in a moment.',
@@ -51,7 +51,7 @@ export const withdrawEth = async (amount) => {
   try {
     await window.ethereum.request({
       method: 'eth_sendTransaction',
-      params: [txParams],
+      params: [txParams, 'latest'],
     })
     return {
       status: 'Transaction Successful. Refresh in a moment',
@@ -75,7 +75,7 @@ export const getBalance = async () => {
   try {
     const response = await window.ethereum.request({
       method: 'eth_call',
-      params: [reqParams],
+      params: [reqParams, 'latest'],
     })
     const exhRate = await exchangeRate()
     const balance = web3.utils.fromWei(response, 'ether')
